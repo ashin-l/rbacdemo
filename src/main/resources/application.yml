@@ -1,3 +1,30 @@
+server:
+  port: 9090
+
 spring:
-  server:
-    port: 8081
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://127.0.0.1:5432/mydb
+    username: postgres
+    password: 111
+    # druid 链接池配置
+    druid:
+      initial-size: 1
+      min-idle: 1
+      max-active: 10
+      max-wait: 60000
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: true
+      max-open-prepared-statements: 20
+      async-init: true
+
+mybatis:
+  type-aliases-package: com.example.rbacdemo.model
+  mapper-locations:
+  - classpath:/mapper/*
+  configuration:
+    map-underscore-to-camel-case: true
