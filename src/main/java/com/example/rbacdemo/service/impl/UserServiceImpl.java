@@ -1,5 +1,7 @@
 package com.example.rbacdemo.service.impl;
 
+import java.util.List;
+
 import com.example.rbacdemo.dao.UserDao;
 import com.example.rbacdemo.model.SysUser;
 import com.example.rbacdemo.service.UserService;
@@ -18,4 +20,15 @@ public class UserServiceImpl implements UserService {
   public int save(SysUser user) {
     return userDao.save(user);
   }
+
+  @Override
+  public List<SysUser> getUserList(Integer limit, Integer offset) {
+    return userDao.getUserList(limit, offset);
+  }
+
+  @Override
+  public Long getTotal() {
+    return userDao.getTotal();
+  }
+
 }

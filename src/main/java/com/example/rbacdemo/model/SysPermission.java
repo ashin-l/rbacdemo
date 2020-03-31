@@ -1,0 +1,16 @@
+package com.example.rbacdemo.model;
+
+import lombok.Data;
+
+@Data
+public class SysPermission {
+
+  private int id;
+  private int parentId;
+  private String name;
+  private String css;
+  private String href;
+  private int type;
+  private int sort;
+
+}

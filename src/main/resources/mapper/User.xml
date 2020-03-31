@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- mapper:根标签，namespace：命名空间，随便写，一般保证命名空间唯一 -->
+<mapper namespace="com.example.rbacdemo.dao.UserDao">
+  <select id="getTotal" resultType="long">
+    select count(*) from sys_user
+  </select>
+
+  <select id="getUserList" parameterType="int" resultType="com.example.rbacdemo.model.SysUser">
+    select * from sys_user t order by t.id limit #{limit} offset #{offset}
+  </select>
+
+  <update id="updateUser">
+  update sys_user set
+    username = #{username},
+    password = #{password}
+  where id = #{id}
+</update>
+</mapper>
