@@ -17,7 +17,7 @@ public class RoleServiceImpl implements RoleService {
 
   @Override
   public List<SysRole> getAll() {
-    return roleDao.getAll();
+    return roleDao.selectList(null);
   }
 
 }

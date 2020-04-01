@@ -21,23 +21,23 @@ public class UserServiceImpl implements UserService {
   private UserDao userDao;
 
   public int save(SysUser user) {
-    return userDao.save(user);
+    return userDao.insert(user);
   }
 
   @Override
   public IPage<SysUser> getUserList(PageQuery pageQuery) {
     Page<SysUser> page = new Page<>(pageQuery.getCurrentPage(), pageQuery.getPageSize());
-    return userDao.getUserList(page);
+    return userDao.selectPage(page, null);
   }
 
   @Override
-  public Long getTotal() {
-    return userDao.getTotal();
+  public Integer getTotal() {
+    return userDao.selectCount(null);
   }
 
   @Override
   public void update(SysUser user) {
-    userDao.updateUser(user);
+    userDao.updateById(user);
   }
 
 }

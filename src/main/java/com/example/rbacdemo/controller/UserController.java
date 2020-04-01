@@ -50,22 +50,24 @@ public class UserController {
     return Result.ok(RPage.resetPage(userlist));
   }
 
-//  public Result userList(@RequestParam int page, @RequestParam int limit) {
-//    System.out.println(page);
-//    System.out.println(limit);
-//    int offset = (page -1) * limit;
-//    List<SysUser> userlist = userService.getUserList(limit, offset);
-//    Long total = userService.getTotal();
-//    Page<SysUser> p = new Page<SysUser>(total, userlist);
-//    return Result.ok(p);
-//  }
+  // public Result userList(@RequestParam int page, @RequestParam int limit) {
+  // System.out.println(page);
+  // System.out.println(limit);
+  // int offset = (page -1) * limit;
+  // List<SysUser> userlist = userService.getUserList(limit, offset);
+  // Long total = userService.getTotal();
+  // Page<SysUser> p = new Page<SysUser>(total, userlist);
+  // return Result.ok(p);
+  // }
 
   @PostMapping("/add")
   @ResponseBody
   public Result addUser(@RequestBody Map params) {
+    System.out.println(params);
     SysUser user = new SysUser();
     user.setUsername((String) params.get("username"));
     user.setPassword(MD5.crypt((String) params.get("password")));
+    System.out.println(user);
     userService.save(user);
     if (params.get("roleid") != null) {
       SysRoleUser roleuser = new SysRoleUser();
