@@ -2,6 +2,9 @@ package com.example.rbacdemo.service.impl;
 
 import java.util.List;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.rbacdemo.common.PageQuery;
 import com.example.rbacdemo.dao.UserDao;
 import com.example.rbacdemo.model.SysUser;
 import com.example.rbacdemo.service.UserService;
@@ -22,13 +25,19 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public List<SysUser> getUserList(Integer limit, Integer offset) {
-    return userDao.getUserList(limit, offset);
+  public IPage<SysUser> getUserList(PageQuery pageQuery) {
+    Page<SysUser> page = new Page<>(pageQuery.getCurrentPage(), pageQuery.getPageSize());
+    return userDao.getUserList(page);
   }
 
   @Override
   public Long getTotal() {
     return userDao.getTotal();
+  }
+
+  @Override
+  public void update(SysUser user) {
+    userDao.updateUser(user);
   }
 
 }

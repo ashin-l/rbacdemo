@@ -6,9 +6,26 @@
     select count(*) from sys_user
   </select>
 
+  <select id="getUserList" resultType="com.example.rbacdemo.model.SysUser">
+    select * from sys_user t order by t.id
+  </select>
+  <!--
   <select id="getUserList" parameterType="int" resultType="com.example.rbacdemo.model.SysUser">
     select * from sys_user t order by t.id limit #{limit} offset #{offset}
   </select>
+-->
+
+  <insert id="save" useGeneratedKeys="true" keyProperty="id">
+    Insert into sys_user(username,password) values(#{username},#{password})
+  </insert>
+  <!--
+  <insert id="save">
+    <selectKey resultType="long"  order="AFTER" keyProperty="id" >
+        SELECT currval('sys_user_id_seq'::regclass)
+    </selectKey>
+    Insert into sys_user(username,password) values(#{username},#{password})
+  </insert>
+-->
 
   <update id="updateUser">
   update sys_user set

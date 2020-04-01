@@ -1,7 +1,14 @@
-GET http://127.0.0.1:9090/user/list?page=1&limit=3 HTTP/1.1
+Get http://127.0.0.1:9090/user/list?currentPage=1&pageSize=5 HTTP/1.1
+Content-Type: application/json
 
 ###
 POST http://127.0.0.1:9090/user/add HTTP/1.1
 Content-Type: application/json
 
-{"username": "ccc", "password": "1111", "roleid": 1}
+{"username": "eee", "password": "1111", "roleid": 1}
+
+###
+POST http://127.0.0.1:9090/user/update HTTP/1.1
+Content-Type: application/json
+
+{"id": 13, "username": "000", "roleid": 1}

@@ -3,8 +3,12 @@ package com.example.rbacdemo.controller;
 import java.util.List;
 import java.util.Map;
 
-import com.example.rbacdemo.common.Page;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.rbacdemo.common.PageQuery;
+import com.example.rbacdemo.common.RPage;
 import com.example.rbacdemo.common.Result;
+import com.example.rbacdemo.dto.UserInfo;
 import com.example.rbacdemo.model.SysRoleUser;
 import com.example.rbacdemo.model.SysUser;
 import com.example.rbacdemo.service.RoleUserService;
@@ -37,17 +41,24 @@ public class UserController {
     return username + " " + password;
   }
 
-  @GetMapping("/list")
+  @RequestMapping("/list")
   @ResponseBody
-  public Result userList(@RequestParam int page, @RequestParam int limit) {
-    System.out.println(page);
-    System.out.println(limit);
-    int offset = (page -1) * limit;
-    List<SysUser> userlist = userService.getUserList(limit, offset);
-    Long total = userService.getTotal();
-    Page<SysUser> p = new Page<SysUser>(total, userlist);
-    return Result.ok(p);
+  public Result userList(UserInfo userInfo, PageQuery pageQuery) {
+    System.out.println(userInfo);
+    System.out.println(pageQuery);
+    IPage<SysUser> userlist = userService.getUserList(pageQuery);
+    return Result.ok(RPage.resetPage(userlist));
   }
+
+//  public Result userList(@RequestParam int page, @RequestParam int limit) {
+//    System.out.println(page);
+//    System.out.println(limit);
+//    int offset = (page -1) * limit;
+//    List<SysUser> userlist = userService.getUserList(limit, offset);
+//    Long total = userService.getTotal();
+//    Page<SysUser> p = new Page<SysUser>(total, userlist);
+//    return Result.ok(p);
+//  }
 
   @PostMapping("/add")
   @ResponseBody
@@ -58,10 +69,21 @@ public class UserController {
     userService.save(user);
     if (params.get("roleid") != null) {
       SysRoleUser roleuser = new SysRoleUser();
-      roleuser.setRoleId((Long) params.get("roleid"));
+      roleuser.setRoleId(Long.valueOf(String.valueOf(params.get("roleid"))));
       roleuser.setUserId(user.getId());
       roleuserService.addRoleUser(roleuser);
     }
+    return Result.ok();
+  }
+
+  @PostMapping("/update")
+  @ResponseBody
+  public Result updateUser(@RequestBody UserInfo userInfo) {
+    System.out.println(userInfo);
+    SysUser user = new SysUser();
+    user.setId(userInfo.getId());
+    user.setUsername(userInfo.getUsername());
+    userService.update(user);
     return Result.ok();
   }
 }
