@@ -22,13 +22,8 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public List<SysUser> getUserList(Integer limit, Integer offset) {
-    return userDao.getUserList(limit, offset);
-  }
-
-  @Override
-  public Long getTotal() {
-    return userDao.getTotal();
+  public List<SysUser> getUserList() {
+    return userDao.getUserList();
   }
 
 }

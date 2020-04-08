@@ -3,15 +3,16 @@ package com.example.rbacdemo.controller;
 import java.util.List;
 import java.util.Map;
 
-import com.example.rbacdemo.common.Page;
+import com.example.rbacdemo.common.PageQuery;
+import com.example.rbacdemo.common.RPage;
 import com.example.rbacdemo.common.Result;
 import com.example.rbacdemo.model.SysRoleUser;
 import com.example.rbacdemo.model.SysUser;
 import com.example.rbacdemo.service.RoleUserService;
 import com.example.rbacdemo.service.UserService;
 import com.example.rbacdemo.util.MD5;
+import com.github.pagehelper.PageHelper;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,14 +40,10 @@ public class UserController {
 
   @GetMapping("/list")
   @ResponseBody
-  public Result userList(@RequestParam int page, @RequestParam int limit) {
-    System.out.println(page);
-    System.out.println(limit);
-    int offset = (page -1) * limit;
-    List<SysUser> userlist = userService.getUserList(limit, offset);
-    Long total = userService.getTotal();
-    Page<SysUser> p = new Page<SysUser>(total, userlist);
-    return Result.ok(p);
+  public Result userList(PageQuery pageQuery) {
+    PageHelper.startPage(pageQuery.getCurrentPage(), pageQuery.getPageSize());
+    List<SysUser> data = userService.getUserList();
+    return Result.ok(RPage.setPage(data));
   }
 
   @PostMapping("/add")
@@ -56,10 +53,13 @@ public class UserController {
     user.setUsername((String) params.get("username"));
     user.setPassword(MD5.crypt((String) params.get("password")));
     userService.save(user);
+    System.out.println(params);
     if (params.get("roleid") != null) {
       SysRoleUser roleuser = new SysRoleUser();
-      roleuser.setRoleId((Long) params.get("roleid"));
+      roleuser.setRoleId(Long.valueOf(String.valueOf(params.get("roleid"))));
+      System.out.println(user.getId());
       roleuser.setUserId(user.getId());
+      System.out.println(roleuser);
       roleuserService.addRoleUser(roleuser);
     }
     return Result.ok();

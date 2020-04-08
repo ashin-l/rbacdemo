@@ -7,7 +7,6 @@ import com.example.rbacdemo.model.SysUser;
 public interface UserService {
   public int save(SysUser user);
 
-  public List<SysUser> getUserList(Integer limit, Integer offset);
+  public List<SysUser> getUserList();
 
-  public Long getTotal();
 }
