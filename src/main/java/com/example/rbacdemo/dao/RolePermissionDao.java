@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface RolePermissionDao {
 
-  public SysRolePermission getByRoleId(Long roleId);
+  SysRolePermission getByRoleId(Long roleId);
+  int save(SysRolePermission sysRolePermission);
 
 }
