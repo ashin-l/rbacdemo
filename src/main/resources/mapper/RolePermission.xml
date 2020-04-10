@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.rbacdemo.dao.RolePermissionDao">
+
+  <resultMap id="id1" type="com.example.rbacdemo.model.SysRolePermission">
+    <result column="permission_id" jdbcType="ARRAY" property="permissionId" />
+  </resultMap>
+  <select id="getByRoleId" resultMap="id1">
+    select * from sys_role_permission where role_id = #{roleid}
+  </select>
+
+  <!--
+  <insert id="save">
+    insert into sys_role_permission values(#{roleId}, #{permissionId})
+  </insert>
+-->
+</mapper>

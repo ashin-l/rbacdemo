@@ -15,7 +15,7 @@ public class RoleUserServiceImpl implements RoleUserService {
 
   @Override
   public void addRoleUser(SysRoleUser roleuser) {
-    roleuserDao.insert(roleuser);
+    roleuserDao.save(roleuser);
   }
 
 }

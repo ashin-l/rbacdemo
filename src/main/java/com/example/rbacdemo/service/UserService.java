@@ -5,8 +5,11 @@ import java.util.List;
 import com.example.rbacdemo.model.SysUser;
 
 public interface UserService {
-  public int save(SysUser user);
 
-  public List<SysUser> getUserList();
+  int save(SysUser user);
+
+  List<SysUser> getUserList();
+
+  int update(SysUser user);
 
 }

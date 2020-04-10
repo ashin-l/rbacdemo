@@ -1,7 +1,5 @@
 package com.example.rbacdemo;
 
-import java.util.HashMap;
-
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 
@@ -23,9 +21,7 @@ class RbacdemoApplicationTests {
 	@Test
 	void testGetUser() {
 		System.out.println(dataSource.getClass());
-		HashMap map = new HashMap<>();
-		map.put("username", "admin");
-		System.out.println(userDao.selectByMap(map));
+		System.out.println(userDao.getUser("admin"));
 	}
 
 	@Test
@@ -33,7 +29,7 @@ class RbacdemoApplicationTests {
 		final SysUser user = new SysUser();
 		user.setUsername("test1");
 		user.setPassword("111");
-		System.out.println(userDao.insert(user));
+		System.out.println(userDao.save(user));
 	}
 
 	@Test
@@ -42,12 +38,12 @@ class RbacdemoApplicationTests {
 		user.setUsername("test2");
 		user.setPassword("111");
 		user.setId((long) 5);
-		userDao.updateById(user);
+		userDao.updateUser(user);
 	}
 
 	@Test
 	void testDeleteUser() {
-		userDao.deleteById(3);
+		userDao.delete((long) 3);
 	}
 
 }

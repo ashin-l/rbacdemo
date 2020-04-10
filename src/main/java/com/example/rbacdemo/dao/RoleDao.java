@@ -9,5 +9,9 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface RoleDao {
 
+  List<SysRole> getAll();
+
+  SysRole getById(Long roleid);
+
   public List<SysRole> findByCondition(SysRole sysRole);
 }

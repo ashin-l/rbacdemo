@@ -3,9 +3,6 @@ package com.example.rbacdemo.service.impl;
 import java.util.List;
 import java.util.Map;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.rbacdemo.common.PageQuery;
 import com.example.rbacdemo.dao.RoleDao;
 import com.example.rbacdemo.model.SysRole;
@@ -22,12 +19,17 @@ public class RoleServiceImpl implements RoleService {
 
   @Override
   public List<SysRole> getAll() {
-    return roleDao.selectList(null);
+    return roleDao.getAll();
   }
 
   @Override
   public SysRole getById(Long roleid) {
     return roleDao.getById(roleid);
+  }
+
+  @Override
+  public List<SysRole> findByCondition(SysRole sysRole) {
+    return roleDao.findByCondition(sysRole);
   }
 
 }

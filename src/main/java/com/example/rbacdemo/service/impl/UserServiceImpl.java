@@ -21,12 +21,17 @@ public class UserServiceImpl implements UserService {
   private UserDao userDao;
 
   public int save(SysUser user) {
-    return userDao.insert(user);
+    return userDao.save(user);
   }
 
   @Override
   public List<SysUser> getUserList() {
     return userDao.getUserList();
+  }
+
+  @Override
+  public int update(SysUser user) {
+    return userDao.updateUser(user);
   }
 
 }
