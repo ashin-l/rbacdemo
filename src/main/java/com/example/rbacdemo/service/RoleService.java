@@ -6,6 +6,7 @@ import com.example.rbacdemo.model.SysRole;
 
 public interface RoleService {
 
-  public List<SysRole> getAll();
+  List<SysRole> getAll();
+  SysRole getById(Long roleid);
 
 }

@@ -25,19 +25,8 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public IPage<SysUser> getUserList(PageQuery pageQuery) {
-    Page<SysUser> page = new Page<>(pageQuery.getCurrentPage(), pageQuery.getPageSize());
-    return userDao.selectPage(page, null);
-  }
-
-  @Override
-  public Integer getTotal() {
-    return userDao.selectCount(null);
-  }
-
-  @Override
-  public void update(SysUser user) {
-    userDao.updateById(user);
+  public List<SysUser> getUserList() {
+    return userDao.getUserList();
   }
 
 }

@@ -5,6 +5,11 @@ import com.example.rbacdemo.model.SysRolePermission;
 
 import org.apache.ibatis.annotations.Mapper;
 
-public interface RolePermissionDao extends BaseMapper<SysRolePermission> {
+@Mapper
+public interface RolePermissionDao {
+
+  SysRolePermission getByRoleId(Long roleId);
+
+  int save(SysRolePermission sysRolePermission);
 
 }

@@ -20,4 +20,9 @@ public class RoleServiceImpl implements RoleService {
     return roleDao.selectList(null);
   }
 
+  @Override
+  public SysRole getById(Long roleid) {
+    return roleDao.getById(roleid);
+  }
+
 }

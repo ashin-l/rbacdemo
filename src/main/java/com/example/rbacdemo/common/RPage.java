@@ -2,7 +2,7 @@ package com.example.rbacdemo.common;
 
 import java.util.List;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.github.pagehelper.Page;
 
 import lombok.Data;
 
@@ -13,20 +13,16 @@ public class RPage<T> {
   private List<T> list;
 
   public RPage(Long total, List<T> list) {
-      this.total = total;
-      this.list = list;
+    this.total = total;
+    this.list = list;
   }
 
   public RPage(List<T> list) {
+
       this.list = list;
   }
 
-  /**
-   *
-   * @param page IPage对象
-   */
-  public static <T> RPage resetPage(IPage page)
-  {
-      return new RPage(page.getTotal(),page.getRecords());
+  public static <T> RPage setPage(List<?> data) {
+      return new RPage(((Page)data).getTotal(), data);
   }
 }

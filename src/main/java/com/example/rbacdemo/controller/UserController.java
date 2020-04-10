@@ -3,8 +3,6 @@ package com.example.rbacdemo.controller;
 import java.util.List;
 import java.util.Map;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.rbacdemo.common.PageQuery;
 import com.example.rbacdemo.common.RPage;
 import com.example.rbacdemo.common.Result;
@@ -14,8 +12,8 @@ import com.example.rbacdemo.model.SysUser;
 import com.example.rbacdemo.service.RoleUserService;
 import com.example.rbacdemo.service.UserService;
 import com.example.rbacdemo.util.MD5;
+import com.github.pagehelper.PageHelper;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,11 +41,10 @@ public class UserController {
 
   @RequestMapping("/list")
   @ResponseBody
-  public Result userList(UserInfo userInfo, PageQuery pageQuery) {
-    System.out.println(userInfo);
-    System.out.println(pageQuery);
-    IPage<SysUser> userlist = userService.getUserList(pageQuery);
-    return Result.ok(RPage.resetPage(userlist));
+  public Result userList(PageQuery pageQuery) {
+    PageHelper.startPage(pageQuery.getCurrentPage(), pageQuery.getPageSize());
+    List<SysUser> data = userService.getUserList();
+    return Result.ok(RPage.setPage(data));
   }
 
   // public Result userList(@RequestParam int page, @RequestParam int limit) {
@@ -69,10 +66,13 @@ public class UserController {
     user.setPassword(MD5.crypt((String) params.get("password")));
     System.out.println(user);
     userService.save(user);
+    System.out.println(params);
     if (params.get("roleid") != null) {
       SysRoleUser roleuser = new SysRoleUser();
       roleuser.setRoleId(Long.valueOf(String.valueOf(params.get("roleid"))));
+      System.out.println(user.getId());
       roleuser.setUserId(user.getId());
+      System.out.println(roleuser);
       roleuserService.addRoleUser(roleuser);
     }
     return Result.ok();
