@@ -29,9 +29,14 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.baomidou</groupId>
-			<artifactId>mybatis-plus-boot-starter</artifactId>
-			<version>3.3.1.tmp</version>
+		  <groupId>org.mybatis</groupId>
+		  <artifactId>mybatis</artifactId>
+		  <version>3.5.4</version>
+		</dependency>
+		<dependency>
+    	<groupId>com.github.pagehelper</groupId>
+    	<artifactId>pagehelper-spring-boot-starter</artifactId>
+    	<version>1.2.13</version>
 		</dependency>
 		<dependency>
 			<groupId>org.postgresql</groupId>

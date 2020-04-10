@@ -3,6 +3,7 @@ package com.example.rbacdemo.dao;
 import java.util.List;
 
 import com.example.rbacdemo.model.SysUser;
+import com.example.rbacdemo.vo.UserVo;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;

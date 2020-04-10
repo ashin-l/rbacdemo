@@ -20,6 +20,11 @@ create table sys_role(
 );
 insert into sys_role(name, description, create_time, update_time) values('test1', 'xxx', 1586315864, 1586315864);
 
+insert into sys_role(name,description,create_time,update_time) values
+('111', '111', 1585823658, 1585823658),
+('222', '111', 1585823693, 1585823693),
+('333', '333', 1585823718, 1585823718);
+
 create table sys_role_permission(
   role_id integer,
   permission_id integer[]
