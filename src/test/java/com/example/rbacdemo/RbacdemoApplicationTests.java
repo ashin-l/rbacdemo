@@ -9,6 +9,7 @@ import com.example.rbacdemo.model.SysUser;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootTest
 class RbacdemoApplicationTests {
@@ -34,10 +35,10 @@ class RbacdemoApplicationTests {
 
 	@Test
 	void testUpdateUser() {
-		final SysUser user = new SysUser();
-		user.setUsername("test2");
-		user.setPassword("111");
-		user.setId((long) 5);
+		SysUser user = new SysUser();
+		user.setUsername("admin");
+		user.setPassword(new BCryptPasswordEncoder().encode("admin"));
+		user.setId((long) 1);
 		userDao.updateUser(user);
 	}
 

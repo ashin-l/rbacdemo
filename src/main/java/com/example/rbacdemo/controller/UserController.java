@@ -11,10 +11,10 @@ import com.example.rbacdemo.model.SysRoleUser;
 import com.example.rbacdemo.model.SysUser;
 import com.example.rbacdemo.service.RoleUserService;
 import com.example.rbacdemo.service.UserService;
-import com.example.rbacdemo.util.MD5;
 import com.github.pagehelper.PageHelper;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -63,8 +63,8 @@ public class UserController {
     System.out.println(params);
     SysUser user = new SysUser();
     user.setUsername((String) params.get("username"));
-    user.setPassword(MD5.crypt((String) params.get("password")));
-    System.out.println(user);
+    user.setPassword(new BCryptPasswordEncoder().encode((String) params.get("password")));
+    //user.setPassword(MD5.crypt((String) params.get("password")));
     userService.save(user);
     System.out.println(params);
     if (params.get("roleid") != null) {

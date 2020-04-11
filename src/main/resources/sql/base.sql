@@ -27,10 +27,10 @@ insert into sys_role(name,description,create_time,update_time) values
 
 create table sys_role_permission(
   role_id integer,
-  permission_id integer[]
+  permission_id integer
 );
 
-insert into sys_role_permission values(1, '{1,2}');
+insert into sys_role_permission values(1, 1),(1, 2);
 
 create table sys_permission(
   id serial primary key,

@@ -11,6 +11,7 @@ public class SysPermission {
   private String css;
   private String href;
   private int type;
+  private String permission;
   private int sort;
 
 }

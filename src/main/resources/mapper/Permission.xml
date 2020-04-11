@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- mapper:根标签，namespace：命名空间，随便写，一般保证命名空间唯一 -->
-<mapper namespace="com.example.rbacdemo.dao.PermissionMapper">
+<mapper namespace="com.example.rbacdemo.dao.PermissionDao">
   <select id="getById">
     select * from sys_permission where id = #{id}
   </select>
+
+  <select id="listByUserId" resultType="com.example.rbacdemo.model.SysPermission">
+    <!-- select * from sys_permission as c where c.id in (select a.permission_id from sys_role_permission as a where a.role_id = (select b.role_id from sys_role_user as b where b.user_id = #{userId})) -->
+    select c.* from sys_role_user a inner join sys_role_permission b on a.role_id = b.role_id left join sys_permission c on b.permission_id = c.id where a.user_id = #{userId}
+  </select>
+
 </mapper>
