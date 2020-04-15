@@ -3,12 +3,9 @@ package com.example.rbacdemo.dao;
 import java.util.List;
 
 import com.example.rbacdemo.model.SysUser;
-import com.example.rbacdemo.vo.UserVo;
 
 import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 
 @Mapper
@@ -24,8 +21,8 @@ public interface UserDao {
   @Select("select * from sys_user t where t.username = #{username}")
   SysUser getUser(String username);
 
-  @Options(useGeneratedKeys = true, keyProperty = "id")
-  @Insert("Insert into sys_user(username,password) values(#{username},#{password})")
+  //@Options(useGeneratedKeys = true, keyProperty = "id")
+  //@Insert("Insert into sys_user(username,password) values(#{username},#{password})")
   int save(SysUser user);
 
   int updateUser(SysUser user);

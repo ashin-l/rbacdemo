@@ -38,7 +38,7 @@ class RbacdemoApplicationTests {
 		SysUser user = new SysUser();
 		user.setUsername("admin");
 		user.setPassword(new BCryptPasswordEncoder().encode("admin"));
-		user.setId((long) 1);
+		user.setId(1);
 		userDao.updateUser(user);
 	}
 
