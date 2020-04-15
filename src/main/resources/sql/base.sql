@@ -1,10 +1,11 @@
 create table sys_user(
   id serial primary key,
   username character varying(20) not null,
-  password character varying(100) not null
+  password character varying(100) not null,
+  roles character varying(255)
 );
 
-insert into sys_user(username,password) values('admin', '111');
+insert into sys_user(username,password) values('admin', '111', 'admin');
 
 create table sys_role_user(
   user_id integer primary key,
